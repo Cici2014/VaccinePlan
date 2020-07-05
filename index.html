@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html th:lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>宝宝疫苗接种计划</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"-->
+    <!--rel="stylesheet">-->
+</head>
+<body class="bg-light">
+
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2 class="text-primary">宝宝疫苗接种计划</h2>
+        <p class="lead text-sm">
+            根据宝宝出生日期
+            <br/>
+            生成宝宝专属疫苗接种时间表
+            <br/>
+            马上开始获取接种计划吧
+        </p>
+        <p class="text-sm text-muted">
+            疫苗及接种时间，
+            仅供参考，
+            以当地卫生部门提供的接种计划为准
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">宝宝生日</span>
+                </div>
+                <input id="birthday" type="date" class="form-control" placeholder="输入日期"/>
+            </div>
+        </div>
+    </div>
+
+
+    </p>
+    <p>以下表格中的“开始时间”为接种程序推荐的最早开始接种时间，仅供参考。
+        主要目的是帮助家长记得带孩子去打疫苗。
+    </p>
+    <p>
+        默认选择的是作者自己整理的打针少防御早的方案，如果你还想作调整，可以看下面的另一个表格，自行调整方案。
+    </p>
+    <p>
+        可根据宝宝的身体状况，疫苗是否缺货，日程安排等因素调整接种时间。
+        应遵从医生的指导，尽早接种，合理安排接种间隔。</p>
+
+    <div class="py-5 text-center">
+        <h3 class="text-primary">您的专属疫苗接种计划表</h3>
+    </div>
+    <p>本方案共需接种<span id="count" class="font-weight-bold text-danger">0</span>剂次。
+    <table class="table table-sm" id="timeTable">
+        <thead>
+        <tr>
+            <th scope="col">月龄</th>
+            <th scope="col">开始时间</th>
+            <th scope="col">疫苗</th>
+            <th scope="col">类别</th>
+            <th scope="col">次数</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">0月龄</th>
+            <td>2019/01/02</td>
+            <td><span class="text-primary">乙肝疫苗</span>
+            </td>
+            <td>第一类</td>
+            <td>第1剂</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="py-5 text-center">
+        <h3 class="text-primary">编辑疫苗方案</h3>
+    </div>
+
+    <!--<div class="row">-->
+    <!--<div class="col">-->
+    <p>
+        点击下方表格，修改疫苗方案。系统将自动排除包含相同疾病的疫苗以保证没有重复接种，并同时根据您的修改更新上方的“接种计划表”。
+        （不会自动排除AC流脑，2岁以内接尽早种多糖结合疫苗保护宝宝，2岁以后再用防护范围更广的多糖疫苗）
+    </p>
+    <!--</div>-->
+    <!--</div>-->
+    <table id="chooseVac" class="table table-sm">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">疫苗</th>
+            <th scope="col">类别</th>
+            <th scope="col">接种计划</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">
+                <div class="form-check">
+                    <input class="form-check-input position-static" type="checkbox" value="option1"
+                           aria-label="...">
+                </div>
+            </th>
+            <td>
+                <span class="text-primary">乙肝疫苗</span>
+                <br/>
+                <small class="font-weight-light">重组乙型肝炎疫苗</small>
+            </td>
+            <td>第一类</td>
+            <td>
+                <ol class="list-group">
+                    <li class="list-group-item">2019/01/02 第1剂</li>
+                    <li class="list-group-item">2019/01/02 第2剂</li>
+                    <li class="list-group-item">2019/01/02 第3剂</li>
+                </ol>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <h3 class="text-primary">可抵御疾病</h3>
+    </div>
+    <p class="text-sm text-muted">
+        您选择的疫苗可帮助宝宝抵抗以下疾病：
+        <br/>
+        <span class="font-weight-lighter">红色代表所选疫苗未包含该疾病，点击疾病名称，查看可以使用哪些疫苗</span>
+    </p>
+
+    <ul class="list-group text-center" id="diseases">
+        <li class="list-group-item list-group-item-primary">乙型肝炎</li>
+        <li class="list-group-item list-group-item-danger">结核病</li>
+    </ul>
+
+    <div class="py-5 text-center">
+        <h3 class="text-primary">疫苗小知识</h3>
+    </div>
+
+    <div>
+        <p>
+            《疫苗流通和预防接种管理条例》将疫苗分为第一类疫苗和第二类疫苗。
+            第一类疫苗是指政府免费向公民提供，公民应当依照政府的规定受种的疫苗，包括国家免疫规划疫苗，省级人民政府在执行国家免疫规划时增加的疫苗，以及县级以上人民政府或者其卫生行政部门组织的应急接种或者群体性预防接种所使用的疫苗。
+            第二类疫苗是指由公民自费并且自愿受种的其他疫苗。
+        </p>
+        <p>
+            在选择疫苗时可以优先选择联合疫苗，接种次数少，预防疾病多，大人少跑路，小孩少受罪。
+        </p>
+    </div>
+
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!--<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>-->
+<!--<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>-->
+
+<script src="./static/js/plugins/jquery.dateFormat.js"></script>
+<script src="./static/js/main.js"></script>
+
+</html>
